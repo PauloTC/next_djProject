@@ -24,11 +24,6 @@ export default function Header() {
               <a>Add Event</a>
             </Link>
           </li>
-          <li>
-            <Link href='/events/remove'>
-              <a>Remove Event</a>
-            </Link>
-          </li>
         </ul>
       </nav>
     </header>
