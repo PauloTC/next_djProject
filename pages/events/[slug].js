@@ -31,9 +31,9 @@ export default function EventPage({evt}) {
           {new Date(evt.date).toLocaleString('en-US')} at {evt.time}
         </span>
         <h1>{evt.name}</h1>
-        {evt.image && (
+        {evt.image[0] && (
           <div className={styles.image}>
-            <Image src={evt.image[0].formats.medium.url} width={960} height={600}/>
+            <Image src={ evt.image[0].formats.medium.url } width={960} height={600}/>
           </div>
         )}
 
