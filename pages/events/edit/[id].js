@@ -7,6 +7,8 @@ import { useRouter } from "next/router"
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from "@/components/Layout"
+import ImageUpload from "@/components/ImageUpload"
+import Modal from "@/components/Modal"
 import {API_URL} from '@/config/index'
 import styles from '@/styles/Form.module.css'
 
@@ -23,13 +25,17 @@ export default function editEventPage({evt}) {
     }
   )
   
-  const [imagePreview, setImagePreview] = useState(evt.image[0] ? evt.image[0].formats.thumbnail.url: null)
-
+  const [imagePreview, setImagePreview] = useState(
+    evt.image[0] ? evt.image[0].formats.thumbnail.url: null
+  )
+  
+  const [ showModal, setShowModal ] = useState(false)
+  
+  
   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     //validacion
     const hasEmptyFields = Object.values(values).some(
       (element) => element === ''
@@ -55,6 +61,14 @@ export default function editEventPage({evt}) {
     }
 
   } 
+
+  const imageUploaded = async (e) => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`)
+    const data = res.json()
+    console.log(data)
+    setImagePreview(data.image.formats.thumbnail.url)
+    setShowModal(false)
+  }
 
   const handleInputChange = (e) => {
     const {name, value} = e.target
@@ -120,10 +134,15 @@ export default function editEventPage({evt}) {
       )}
 
       <div>
-        <button className='btn-secondary'>
+        <button onClick={()=> setShowModal(true)} className='btn-secondary'>
           <FaImage /> Set Image
         </button>
       </div>
+      <Modal show={showModal} onClose={ ()=> setShowModal(false) } >
+        <ImageUpload 
+          evtId={evt.id} 
+          imageUploaded={imageUploaded} />
+      </Modal>
     </Layout>
   )
 }
