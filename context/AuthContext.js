@@ -18,19 +18,21 @@ export const AuthProvider = ({children}) => {
     const res = await fetch(`${NEXT_URL}/api/login`, {
       method: 'POST',
       headers : {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         identifier,
         password
       })
     })
-    
-    const data = await res.json()
 
-    console.log(data);
-    // if(res.ok) {
-    // } else
+    const data = await res.json()
+    if(res.ok) {
+      setUser(data.user)
+    } else {
+      setError(data.message)
+      setError(null)
+    }
   }
 
   //Logout user
