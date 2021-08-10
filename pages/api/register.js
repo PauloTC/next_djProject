@@ -2,7 +2,6 @@ import cookie from  'cookie'
 import {API_URL} from '@/config/index'
 
 export default async ( req , res ) => {
-  console.log(req.body)
   if(req.method === 'POST') {
     const { username,email, password } = req.body
     const strapiRes = await fetch(`${API_URL}/auth/local/register`, {
