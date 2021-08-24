@@ -13,7 +13,7 @@ import Modal from "@/components/Modal"
 import {API_URL} from '@/config/index'
 import styles from '@/styles/Form.module.css'
 
-export default function editEventPage({evt, token}) {
+export default function EditEventPage({evt, token}) {
 
   const [values, setValues] = useState({
       name: evt.name,
