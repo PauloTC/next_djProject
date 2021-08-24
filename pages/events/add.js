@@ -1,8 +1,8 @@
 import { parseCookies } from '@/helpers/index';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from "react"
-import { useRouter } from "next/router"
+import {useState} from "react"
+import {useRouter} from "next/router"
 import Link from 'next/link'
 import Layout from "@/components/Layout"
 import {API_URL} from '@/config/index'
